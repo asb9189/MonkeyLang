@@ -2,6 +2,7 @@ package ast
 
 import (
   "MonkeyLang/token"
+  "bytes"
 )
 
 type Node interface {
@@ -25,7 +26,7 @@ type Program struct {
 }
 
 func (p *Program) String() string {
-  var out = bytes.Buffer
+  var out bytes.Buffer
 
   for _, s := range p.Statements {
     out.WriteString(s.String())
@@ -51,7 +52,7 @@ func (ls *LetStatement) statementNode() {}
 func (ls *LetStatement) TokenLiteral() string { return ls.Token.Literal }
 
 func (ls *LetStatement) String() string {
-  var out = bytes.Buffer
+  var out bytes.Buffer
 
   out.WriteString(ls.TokenLiteral() + " ")
   out.WriteString(ls.Name.String())
@@ -73,7 +74,7 @@ type ReturnStatement struct {
 func (rs *ReturnStatement) statementNode() {}
 func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
 func (rs *ReturnStatement) String() string {
-  var out = bytes.Buffer
+  var out bytes.Buffer
 
   out.WriteString(rs.TokenLiteral() + " ")
   if rs.ReturnValue != nil {
